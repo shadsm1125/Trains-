@@ -13,67 +13,120 @@
             <h1 class="text-center Trains"></span> All Aboard!</h1>
         </div>
 
+        <table>
+          <tr>
+            <th>Train Name</th>
+            <th>Destination</th>
+            <th>Frequency (min)</th>
+            <th>Next Arrival</th>
+            <th>Minutes Away</th>
+        </tr>
+        <tr>
+            <td>Jaguars</td>
+            <td>Super Bowl</td>
+            <td>15</td>
+            <td>04:50</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>Texans</td>
+            <td>Houston</td>
+            <td>25</td>
+            <td>04:35</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>Colts</td>
+            <td>Indianapolis</td>
+            <td>15</td>
+            <td>04:15</td>
+            <td>45</td>
+        </tr>
+        <tr>
+            <td>Titans</td>
+            <td>Nashville</td>
+            <td>60</td>
+            <td>05:45</td>
+            <td>10</td>
+        </tr>
 
+    </table>
 
-  <!-- Table -->
-  <table class="table">
-    ...
-  </table>
-</div>
-
-
-
-<div class="panel panel-default">
-  <!-- Default panel contents -->
-  <div class="panel-heading">Current Train Schedule</div>
-
-  <!-- Table -->
-  <table class="table">
-    ...
-  </table>
-</div>
-
-
-
-
-
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading"></span> Add Train</div>
-                    <div class="panel-body">
-                        <p><b>Train Name</b></p>
-                        <div class="form-group">
-                            <input type="text" id="search-term" class="form-control" placeholder="ex: American Train Company ": aria-describedby="basic-addon1">
-                        </div>
-                        <p><b>Destination</b></p>
-                        <div class="form-group">
-                            <input type="text"  id="number-records" class="form-control" placeholder="ex: San Antonio, Texas" aria-describedby="basic-addon1">
-                        </div>
-                        <p><b>First Train Time(HH:mm-military time)</b></p>
-                        <div class="form-group">
-                            <input type="text" id="start-year" class="form-control" placeholder="ex: 15:45" aria-describedby="basic-addon1">
-                        </div>
-                        <p><b>Frequency (min)</b></p>
-                        <div class="form-group">
-                            <input type="text"  id="end-year" class="form-control" placeholder="ex: 12" aria-describedby="basic-addon1">
-                        </div>
-                        
-                        <div class="btn-group" role="group" aria-label="...">
-                            <button id="form-submission" type="button" class="btn btn-default"><span class="fa fa-search"> </span> Submit</button>
-                        </div>
-                        <button type="button" class="btn btn-default"><span class="fa fa-trash-o"> </span> Clear</button>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"></span> Add Train</div>
+                <div class="panel-body">
+                    <p><b>Train Name</b></p>
+                    <div class="form-group">
+                        <input type="text" id="search-term" class="form-control" placeholder="ex: American Train Company ": aria-describedby="basic-addon1">
                     </div>
+                    <p><b>Destination</b></p>
+                    <div class="form-group">
+                        <input type="text"  id="number-records" class="form-control" placeholder="ex: San Antonio, Texas" aria-describedby="basic-addon1">
+                    </div>
+                    <p><b>First Train Time(HH:mm-military time)</b></p>
+                    <div class="form-group">
+                        <input type="text" id="start-year" class="form-control" placeholder="ex: 15:45" aria-describedby="basic-addon1">
+                    </div>
+                    <p><b>Frequency (min)</b></p>
+                    <div class="form-group">
+                        <input type="text"  id="end-year" class="form-control" placeholder="ex: 12" aria-describedby="basic-addon1">
+                    </div>
+
+                    <div class="btn-group" role="group" aria-label="...">
+                        <button id="form-submission" type="button" class="btn btn-default"><span class="fa fa-search"> </span> Submit</button>
+                    </div>
+                    <button type="button" class="btn btn-default"><span class="fa fa-trash-o"> </span> Clear</button>
                 </div>
-                
-<style>
+            </div>
 
-    .jumbotron {
-    background-color: #808080;
-    
-}
+            <style>
 
-</style>
-<script type="text/javascript" src="main.js"></script>
-        </body>
-        </html>
+                .jumbotron {
+                    background-color: #808080;
+
+                }
+
+            </style>
+            <script type="text/javascript" src="main.js"></script>
+
+
+            <script src="https://code.jquery.com/jquery.js"></script>
+
+            <script>
+                var tFrequency = 3;
+        var firstTime = "03:30"; // Time is 3:30 AM
+
+        // First Time (pushed back 1 year to make sure it comes before current time)
+        var firstTimeConverted = moment(firstTime,"hh:mm").subtract(1, "years");
+        console.log(firstTimeConverted);
+
+        // Current Time
+        var currentTime = moment();
+        console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+        // Difference between the times
+        var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+        console.log("DIFFERENCE IN TIME: " + diffTime);
+
+        // Time apart (remainder)
+        var tRemainder = diffTime % tFrequency;
+        console.log(tRemainder);
+
+        // Minute Until Train
+        var tMinutesTillTrain = tFrequency - tRemainder;
+        console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+        // Next Train
+        var nextTrain = moment().add(tMinutesTillTrain, "minutes")
+        console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"))
+
+
+
+    </script>
+
+
+
+</body>
+</html>
